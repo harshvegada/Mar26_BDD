@@ -1,0 +1,56 @@
+{
+  "environments": {
+    "DEV": {
+      "api": {
+        "baseUrl": "https://dev-api.example.com",
+        "timeout": 30000
+      },
+      "database": {
+        "host": "dev-db.example.com",
+        "port": 5432,
+        "name": "app_dev",
+        "username": "dev_user",
+        "password": "dev_password"
+      },
+      "logging": {
+        "level": "Debug",
+        "enableConsole": true
+      },
+      "authentication": {
+        "jwtIssuer": "https://dev-auth.example.com",
+        "jwtAudience": "app-dev"
+      },
+      "features": {
+        "enableSwagger": true,
+        "enableCaching": false,
+        "enableEmailNotifications": false
+      }
+    },
+    "QA": {
+      "api": {
+        "baseUrl": "https://qa-api.example.com",
+        "timeout": 30000
+      },
+      "database": {
+        "host": "qa-db.example.com",
+        "port": 5432,
+        "name": "app_qa",
+        "username": "qa_user",
+        "password": "qa_password"
+      },
+      "logging": {
+        "level": "Information",
+        "enableConsole": true
+      },
+      "authentication": {
+        "jwtIssuer": "https://qa-auth.example.com",
+        "jwtAudience": "app-qa"
+      },
+      "features": {
+        "enableSwagger": true,
+        "enableCaching": true,
+        "enableEmailNotifications": true
+      }
+    }
+  }
+}
