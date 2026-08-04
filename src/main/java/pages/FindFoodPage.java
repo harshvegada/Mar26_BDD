@@ -29,6 +29,7 @@ public class FindFoodPage extends CommonPage {
     private final String RESTAURANT_NAME_HAVING_DISHES = "//div[@data-testid = 'restaurants-grid']//p[1][not(contains(text(),' 0 dishes'))]/preceding-sibling::h3";
     private final String CLICK_ON_RESTAURANT_WITH_NAME = "//h3[contains(text(),'%s')]/following::a[1]";
     private final String DISMISS_NOTIFICATION = "//button[@id='docs-banner-dismiss']";
+    private final String SEARCH_RESTAURANT_INPUT = "//input[@placeholder='Search restaurants…']";
 
     public void waitForPageLoad() {
         waitUntilElementMoreThen(By.xpath(RESTAURANT_GRID), 1);
@@ -127,6 +128,10 @@ public class FindFoodPage extends CommonPage {
 //        System.out.println(String.format(s, restaurantName, s2));
 //    }
     public void searchRestaurant(String restaurantName) {
-        setTextOnElement(By.xpath("//input[@placeholder='Search for restaurants']"), restaurantName);
+        setTextOnElement(By.xpath(SEARCH_RESTAURANT_INPUT), restaurantName);
+    }
+
+    public void selectRestaurant(String restaurantName) {
+        clickOnElement(By.xpath(String.format(CLICK_ON_RESTAURANT_WITH_NAME, restaurantName)));
     }
 }

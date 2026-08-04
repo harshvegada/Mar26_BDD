@@ -23,4 +23,10 @@ public class FindFoodSteps {
     public void user_open_menu_for_restaurant(String restaurantName) {
 
     }
+
+    @And("user search and select {string} restaurant")
+    public void userSearchAndSelectRestaurant(String restaurantName) {
+        findFoodPage.searchRestaurant(restaurantName);
+        findFoodPage.selectRestaurant(restaurantName);
+    }
 }

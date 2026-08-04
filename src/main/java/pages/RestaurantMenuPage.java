@@ -9,7 +9,7 @@ import org.openqa.selenium.Keys;
  * OOPS: Inheritance concept is used here to extend the CommonPage class and inherit its methods and properties.
  * OOPS: Method overloading concept is used here to provide multiple methods with the same name but different parameters to interact with the elements on the page.
  */
-public class RestauarantMenuPage extends CommonPage {
+public class RestaurantMenuPage extends CommonPage {
 
     private final String PROCEED_TO_CHECKOUT_BTN = "//button[@data-testid='proceed-checkout-btn']";
     private final String RESTAURANT_NAME = "//h2[@data-testid='restaurant-name']";
@@ -40,6 +40,12 @@ public class RestauarantMenuPage extends CommonPage {
         for (int count = 1; count <= quantity; count++) {
             actionsThreadLocal.get().sendKeys(Keys.ARROW_UP).perform();
         }
+    }
+
+    public void setQuantityOfGivenDish(String dish, String quantity) {
+        clickOnElement(By.xpath(String.format(DISH_QUANTITY_INPUT, dish)));
+        clearTextOnElement(By.xpath(String.format(DISH_QUANTITY_INPUT, dish)));
+        setTextOnElement(By.xpath(String.format(DISH_QUANTITY_INPUT, dish)), quantity);
     }
 
     public String getSubTotal() {

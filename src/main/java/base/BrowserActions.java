@@ -192,6 +192,10 @@ public abstract class BrowserActions {
         waitForElementVisibility(by, true).sendKeys(text);
     }
 
+    protected void clearTextOnElement(By by) {
+        waitForElementVisibility(by, true).clear();
+    }
+
     protected void clickOnElement(WebElement element) {
         waitForElementToBeClickable(element).click();
     }

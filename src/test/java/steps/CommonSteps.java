@@ -29,15 +29,16 @@ public class CommonSteps {
 
     @When("user click on button text contains {string}")
     public void user_click_on_button_text_contains(String buttonTextContains) {
+        commonPage.clickOnButtonNameContains(buttonTextContains);
     }
 
     @When("user click on checkbox having label as {string}")
     public void user_click_on_checkbox_having_label_as(String labelName) {
-
+        commonPage.clickOnLabelCheckBox(labelName);
     }
 
     @Then("user verify {string} text should be displayed")
     public void user_verify_text_should_be_displayed(String visibleText) {
-
+        System.out.println(" =========> " + commonPage.isTextDisplayed(visibleText));
     }
 }

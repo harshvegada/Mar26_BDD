@@ -11,6 +11,10 @@ import org.openqa.selenium.By;
  */
 public class PaymentPage extends CommonPage {
 
+    private static final String UPI_TAB = "//button[@data-testid='pm-tab-UPI']";
+    private static final String NETBANKING_TAB = "//button[@data-testid='pm-tab-NetBanking']";
+    private static final String CARD_TAB = "//button[@data-testid='pm-tab-Card']";
+
     private final String PAY_PLACE_ORDER_BTN = "//button[@id='pay-btn']";
     private final String TOTAL_PAYABLE = "//span[@data-testid='payment-total']";
     private final String ERROR_CAPTCHA_MSG = "//p[text()='Please confirm the captcha before paying']";
@@ -46,5 +50,30 @@ public class PaymentPage extends CommonPage {
 
     public void setUPIId(String upiId) {
         setTextOnElement(By.xpath(UPI_ID_INPUT), upiId);
+    }
+
+    public void makePaymentUsing(String paymentMethod) {
+        if (paymentMethod.equalsIgnoreCase("UPI")) {
+            clickOnElement(By.xpath(UPI_TAB));
+            makePaymentUsingUPI();
+        } else if (paymentMethod.equalsIgnoreCase("Card")) {
+            clickOnElement(By.xpath(CARD_TAB));
+            makePaymentUsingCard();
+        } else if (paymentMethod.equalsIgnoreCase("Net Banking")) {
+            clickOnElement(By.xpath(NETBANKING_TAB));
+            makePaymentUsingNetbanking();
+        }
+    }
+
+    public void makePaymentUsingUPI() {
+        setTextOnElement(By.xpath(UPI_ID_INPUT), "harshhpatel07@okicici");
+    }
+
+    public void makePaymentUsingCard(){
+
+    }
+
+    public void makePaymentUsingNetbanking(){
+
     }
 }

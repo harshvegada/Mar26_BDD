@@ -19,8 +19,13 @@ public class LoginPage extends CommonPage {
     private final String ACCESS_CODE_INPUT = "//input[@data-testid='access-code']";
     private final String CONTINUE_BUTTON = "//button[text()= 'Continue']";
     private final String CHOOSE_FOOD_APP = "//button[@data-testid='choose-food']";
-    private final String USER_AUTO_FILL_BUTTON = "//button[@data-email='user@technocredits.com']";
-    private final String OWNER_AUTO_FILL_BUTTON = "//button[@data-email='owner.cafe@technocredits.com']";
+    private final String USER_AUTO_FILL_BUTTON = "//button[@data-testid='roster-fill-customer']";
+    private final String OWNER_AUTO_FILL_BUTTON = "//button[@data-testid='roster-fill-owner']";
+    private final String ADMIN_AUTO_FILL_BUTTON = "//button[@data-testid='roster-fill-admin']";
+
+    private final String OWNER_ICON = "//button[@data-role='owner']";
+    private final String ADMIN_ICON = "//button[@data-role='admin']";
+
     private final String LOGIN_BUTTON = "//button[@data-testid='login-submit-btn']";
 
     public void doLoginForCustomer() {
@@ -61,6 +66,7 @@ public class LoginPage extends CommonPage {
 //
 //        System.out.println("STEP - Click on Sign In Food link");
 //        clickOnElement(By.xpath(CHOOSE_FOOD_APP));
+        clickOnElement(By.xpath(OWNER_ICON));
 
         System.out.println("STEP - Click on AutoFill & SignIn as customer");
         clickOnElement(By.xpath(OWNER_AUTO_FILL_BUTTON));
@@ -88,8 +94,10 @@ public class LoginPage extends CommonPage {
 //        System.out.println("STEP - Click on Sign In Food link");
 //        clickOnElement(By.xpath(CHOOSE_FOOD_APP));
 
+        clickOnElement(By.xpath(ADMIN_ICON));
+
         System.out.println("STEP - Click on AutoFill & SignIn as customer");
-        clickOnElement(By.xpath(OWNER_AUTO_FILL_BUTTON));
+        clickOnElement(By.xpath(ADMIN_AUTO_FILL_BUTTON));
 
         //System.out.println("STEP - Enter email");
         //driver.findElement(By.xpath("//input[@data-testid='login-email']")).sendKeys("raghu.customer@technocredits.com");

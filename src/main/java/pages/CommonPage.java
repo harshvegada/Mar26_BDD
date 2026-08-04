@@ -26,12 +26,36 @@ public class CommonPage extends BrowserActions {
         clickOnElement(By.xpath(locator));
     }
 
-    public void clickOnFoodApplication(){
+    public void clickOnFoodApplication() {
         clickOnElement(By.xpath("//button[@data-testid='choose-food']"));
     }
 
-    public void clickOnECommerceApplication(){
+    public void clickOnECommerceApplication() {
         clickOnElement(By.xpath("//button[@data-testid='choose-ecommerce']"));
 
+    }
+
+    public void clickOnButtonNameContains(String buttonTextContains) {
+        String locatorvalue = "//button[contains(text(),'%1$s')] | //a[contains(text(),'%1$s')]";
+        String locator = String.format(locatorvalue, buttonTextContains);
+        clickOnElement(By.xpath(locator));
+    }
+
+    public void clickOnLabelCheckBox(String labelName) {
+        String locatorValue = "//span[text()='%s']";
+        String locator = String.format(locatorValue, labelName);
+        if (!isElementSelected(By.xpath(locator))) {
+            clickOnElement(By.xpath(locator));
+        }
+    }
+
+    private boolean isElementSelected(By by) {
+        return waitForElementVisibility(by).isSelected();
+    }
+
+    public boolean isTextDisplayed(String visibleText) {
+        String locatorValue = "//*[text()='%s']";
+        String locator = String.format(locatorValue, visibleText);
+        return isElementDisplayed(By.xpath(locator));
     }
 }
