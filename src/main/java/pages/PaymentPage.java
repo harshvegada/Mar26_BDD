@@ -69,11 +69,15 @@ public class PaymentPage extends CommonPage {
         setTextOnElement(By.xpath(UPI_ID_INPUT), "harshhpatel07@okicici");
     }
 
-    public void makePaymentUsingCard(){
-
+    public void makePaymentUsingCard() {
+        setTextOnElement(By.xpath("//input[@id='f-card']"), "1234 5678 9012 3456");
+        setTextOnElement(By.xpath("//input[@id='f-expiry']"), "12/25");
+        setTextOnElement(By.xpath("//input[@id='f-cvv']"), "123");
     }
 
-    public void makePaymentUsingNetbanking(){
-
+    public void makePaymentUsingNetbanking() {
+        setTextOnElement(By.xpath("//input[@id='f-nbuser']"), "hdfcadmin");
+        setTextOnElement(By.xpath("//input[@id='f-nbpass']"), "technocredits");
+        clickOnElement(By.xpath("//button[text()='Authenticate']"));
     }
 }

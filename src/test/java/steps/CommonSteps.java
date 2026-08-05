@@ -2,6 +2,7 @@ package steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
 import pages.CommonPage;
 
 public class CommonSteps {
@@ -39,6 +40,7 @@ public class CommonSteps {
 
     @Then("user verify {string} text should be displayed")
     public void user_verify_text_should_be_displayed(String visibleText) {
-        System.out.println(" =========> " + commonPage.isTextDisplayed(visibleText));
+        Assertions.assertTrue(commonPage.isTextDisplayed(visibleText), "Text is not displayed: " + visibleText);
+        Assertions.fail("Text is not displayed: " + visibleText);
     }
 }

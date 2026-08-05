@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -59,5 +60,10 @@ public class LoginSteps {
         } else if (profile.equalsIgnoreCase("admin")) {
             loginPage.doLoginForAdmin();
         }
+    }
+
+    @And("user login to {string} application with {string} credentials")
+    public void userLoginToApplicationWithCredentials(String appName, String profile) {
+        loginPage.doLogin(appName, profile);
     }
 }

@@ -17,7 +17,7 @@
 
     <dependencies>
 
-<!--        When, And, Then, @After & @Before-->
+        <!--        When, And, Then, @After & @Before-->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -30,14 +30,14 @@
             <version>7.14.0</version>
         </dependency>
 
-<!--        Engine dependecy will identify the feature files and run it using surefire plaugin-->
+        <!--        Engine dependecy will identify the feature files and run it using surefire plaugin-->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-engine</artifactId>
             <version>6.1.1</version>
         </dependency>
 
-<!--        For running the feature files, we need this dependency-->
+        <!--        For running the feature files, we need this dependency-->
         <!-- Source: https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite -->
         <dependency>
             <groupId>org.junit.platform</groupId>
@@ -49,6 +49,26 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.45.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.0</version>
+        </dependency>
+
+
+        <!--        Allure Cucumber Junit 5-->
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>2.32.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit-platform</artifactId>
+            <version>2.32.0</version>
         </dependency>
 
     </dependencies>

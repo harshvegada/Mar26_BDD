@@ -175,7 +175,7 @@ public abstract class BrowserActions {
 //        return takesScreenshot.getScreenshotAs(OutputType.BYTES);
 //    }
 
-    public static byte[] takeScreenshotForAllure(String methodName) {
+    public static byte[] takeScreenshotForAllure() {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driverThreadLocal.get();
         return takesScreenshot.getScreenshotAs(OutputType.BYTES);
     }

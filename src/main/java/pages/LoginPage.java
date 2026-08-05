@@ -110,4 +110,7 @@ public class LoginPage extends CommonPage {
     }
 
 
+    public void doLogin(String appName, String profile) {
+
+    }
 }
