@@ -41,6 +41,5 @@ public class CommonSteps {
     @Then("user verify {string} text should be displayed")
     public void user_verify_text_should_be_displayed(String visibleText) {
         Assertions.assertTrue(commonPage.isTextDisplayed(visibleText), "Text is not displayed: " + visibleText);
-        Assertions.fail("Text is not displayed: " + visibleText);
     }
 }

@@ -30,6 +30,19 @@
             <version>7.14.0</version>
         </dependency>
 
+        <!--        Allure Cucumber Junit 5-->
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>2.32.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit-platform</artifactId>
+            <version>2.32.0</version>
+        </dependency>
+
         <!--        Engine dependecy will identify the feature files and run it using surefire plaugin-->
         <dependency>
             <groupId>org.junit.platform</groupId>
@@ -57,20 +70,39 @@
             <version>5.8.0</version>
         </dependency>
 
-
-        <!--        Allure Cucumber Junit 5-->
-
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber7-jvm</artifactId>
-            <version>2.32.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit-platform</artifactId>
-            <version>2.32.0</version>
-        </dependency>
-
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <browser>${browser}</browser>
+                        <env>${env}</env>
+                    </systemPropertyVariables>
+                    <includes>
+                        <include>**/TestRunner.java</include>
+                    </includes>
+                    <properties>
+                        <configurationParameters>
+                            cucumber.junit-platform.naming-strategy=long
+                            cucumber.execution.parallel.enabled=true
+                            cucumber.execution.parallel.config.strategy=fixed
+                            cucumber.execution.parallel.config.fixed.parallelism=2
+                            cucumber.publish.enabled=true
+                            cucumber.publish.quiet=true
+                            cucumber.plugin=io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm
+                            cucumber.filter.tags=${tags}
+                            cucumber.execution.execution-mode.feature=concurrent
+                            cucumber.execution.execution-mode.scenario=same_thread
+                        </configurationParameters>
+                    </properties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
