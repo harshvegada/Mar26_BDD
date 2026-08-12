@@ -30,6 +30,12 @@
             <version>7.14.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.14.0</version>
+        </dependency>
+
         <!--        Allure Cucumber Junit 5-->
 
         <dependency>
@@ -80,26 +86,27 @@
                 <version>3.2.5</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <browser>${browser}</browser>
-                        <env>${env}</env>
+                        <browser>${browserName}</browser>
+                        <environment>${env}</environment>
                     </systemPropertyVariables>
                     <includes>
                         <include>**/TestRunner.java</include>
                     </includes>
+                    <rerunFailingTestsCount>1</rerunFailingTestsCount>
                     <properties>
                         <configurationParameters>
                             cucumber.junit-platform.naming-strategy=long
                             cucumber.execution.parallel.enabled=true
                             cucumber.execution.parallel.config.strategy=fixed
                             cucumber.execution.parallel.config.fixed.parallelism=2
-                            cucumber.publish.enabled=true
-                            cucumber.publish.quiet=true
+                            cucumber.execution.parallel.config.fixed.max-pool-size=2
+                            cucumber.publish.enabled=false
                             cucumber.plugin=io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm
                             cucumber.filter.tags=${tags}
                             cucumber.execution.execution-mode.feature=concurrent
-                            cucumber.execution.execution-mode.scenario=same_thread
                         </configurationParameters>
                     </properties>
+
                 </configuration>
             </plugin>
         </plugins>

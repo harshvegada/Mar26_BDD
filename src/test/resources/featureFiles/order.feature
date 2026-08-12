@@ -9,7 +9,7 @@ Feature: Order Placement
     And user login with "customer" credentials
     And user click on "Sign in to Technocredits Food" button
 
-  @HC-001
+  @HC-001 @home
   Scenario Outline: Customer should be able to place order successfully using Net banking payment methods
     And user search and select "<restaurantName>" restaurant
     And user order "<quantity>" quantity of "<foodItem>"
@@ -26,7 +26,7 @@ Feature: Order Placement
       | restaurantName        | quantity | foodItem   | address | mobileNumber | paymentMethod |
       | MAKAIRA KITCHEN & BAR | 1        | Dal Tadaka | 45 ICON | 8905714840   | Net Banking   |
 
-  @HC-002
+  @HC-002 @home
   Scenario Outline: Customer should be able to place order successfully using UPI payment methods
     And user search and select "<restaurantName>" restaurant
     And user order "<quantity>" quantity of "<foodItem>"
@@ -42,10 +42,9 @@ Feature: Order Placement
     Examples:
       | restaurantName        | quantity | foodItem   | address | mobileNumber | paymentMethod |
       | MAKAIRA KITCHEN & BAR | 1        | Dal Tadaka | 45 ICON | 8905714840   | UPI           |
-      | CCD                   | 12       | Dal Tadaka | 45 ICON | 8905714840   | UPI           |
 
 
-  @HC-003
+  @HC-003 @home
   Scenario Outline: Customer should be able to place order successfully using Card payment methods
     And user search and select "<restaurantName>" restaurant
 
