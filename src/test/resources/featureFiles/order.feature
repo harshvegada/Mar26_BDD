@@ -84,3 +84,8 @@ Feature: Order Placement
     And user click on button text contains "Place Order"
     Then user verify "Order placed!" text should be displayed
 
+
+    @page
+  Scenario: Verify Edit button on profile is clickable
+    And user navigate to profile
+    And user click on button text contains "Edit"

@@ -29,6 +29,6 @@ public class AutomationHooks {
             scenario.attach(BrowserActions.takeScreenshotForAllure(), "image/png", scenario.getName());
             Allure.addAttachment(scenario.getName(), "image/jpeg", new ByteArrayInputStream(BrowserActions.takeScreenshotForAllure()), ".jpg");
         }
-        BrowserActions.quitBrowser();
+//        BrowserActions.quitBrowser();
     }
 }

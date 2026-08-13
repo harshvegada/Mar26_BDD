@@ -8,9 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.io.File;
 import java.time.Duration;
@@ -201,7 +199,14 @@ public abstract class BrowserActions {
     }
 
     protected void clickOnElement(By by) {
-        waitForElementToBeClickable(by).click();
+//        waitForElementToBeClickable(by).click();
+        waitUntilPageLoad();
+        try {
+            Thread.sleep(1000); // Adding a small delay to ensure the element is ready for interaction
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        waitForElementVisibility(by).click();
     }
 
     protected List<String> getAllOptionsFromDropDown(By by) {
@@ -290,5 +295,20 @@ public abstract class BrowserActions {
     protected void rightClickOnElement(By by) {
         WebElement element = waitForElementVisibility(by);
         actionsThreadLocal.get().contextClick(element).build().perform();
+    }
+
+    public void waitUntilPageLoad() {
+        Wait<WebDriver> wait = new FluentWait<>(driverThreadLocal.get())
+                .withTimeout(Duration.ofSeconds(15))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(Exception.class);
+
+        wait.until(driver -> {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            while(!js.executeScript("return document.readyState").toString().equals("complete")) {
+                System.out.println("Waiting for page to load...");
+            }
+            return null;
+        });
     }
 }
