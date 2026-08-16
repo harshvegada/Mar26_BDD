@@ -1,5 +1,6 @@
 package pages;
 
+import constant.LocatorType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -122,7 +123,7 @@ public class FindFoodPage extends CommonPage {
 //        String restaurantName = "Jyotis kitchen";
 //        String s2 = "Harsh";
 
-    /// /        String s = "//h3[contains(text(),'" + restaurantName + "')]/following::a[1]";
+    //        String s = "//h3[contains(text(),'" + restaurantName + "')]/following::a[1]";
 //        String s = "//h3[contains(text(),'%s')]/following::a[1]//%s";
 //
 //        System.out.println(String.format(s, restaurantName, s2));
@@ -132,6 +133,7 @@ public class FindFoodPage extends CommonPage {
     }
 
     public void selectRestaurant(String restaurantName) {
+        WebElement element = getLocator(LocatorType.CSS, "#restaurants-grid");
         clickOnElement(By.xpath(String.format(CLICK_ON_RESTAURANT_WITH_NAME, restaurantName)));
     }
 }

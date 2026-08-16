@@ -1,5 +1,7 @@
 package base;
 
+import constant.Browser;
+import constant.LocatorType;
 import customexception.BrowserInvalidException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -62,6 +64,55 @@ public abstract class BrowserActions {
         return executionMode.toUpperCase();
     }
 
+    public static void main(String[] args) {
+        Browser browserName = Browser.CHROME;
+        start(browserName, "http://automationbykrishna.com");
+    }
+
+    protected WebElement getLocator(LocatorType locatorType, String locatorValue) {
+        switch (locatorType) {
+            case CSS:
+                return driverThreadLocal.get().findElement(By.cssSelector(locatorValue));
+            case XPATH:
+                return driverThreadLocal.get().findElement(By.xpath(locatorValue));
+            default:
+                throw new RuntimeException("Locator type not supported");
+        }
+    }
+
+    public static WebDriver start(Browser browser, String url) {
+        System.out.println("STEP - Launch browser & hit url");
+        String mode = getExecutionMode();
+        switch (browser) {
+            case CHROME:
+                ChromeOptions option = new ChromeOptions();
+                option.addArguments("--start-maximized");
+                driverThreadLocal.set(new ChromeDriver(option));
+                break;
+
+            case EDGE:
+                driverThreadLocal.set(new EdgeDriver());
+                break;
+
+            case FIREFOX:
+                FirefoxOptions options = new FirefoxOptions();
+                options.addArguments("--headless");
+                driverThreadLocal.set(new FirefoxDriver());
+                break;
+
+            default:
+                throw new BrowserInvalidException("Given browser not supported");
+        }
+
+//        driverThreadLocal.get().manage().window().maximize();
+        driverThreadLocal.get().get(url);
+//		driverThreadLocal.manage().window().maximize();
+        waitThreadLocal.set(new WebDriverWait(driverThreadLocal.get(), Duration.ofSeconds(16)));
+        actionsThreadLocal.set(new Actions(driverThreadLocal.get()));
+        //driverThreadLocal.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        return driverThreadLocal.get();
+    }
+
     public static WebDriver start(String browser, String url) {
         System.out.println("STEP - Launch browser & hit url");
         String mode = getExecutionMode();
@@ -107,17 +158,13 @@ public abstract class BrowserActions {
     }
 
     protected WebElement waitForElementVisibility(By by, boolean shouldWait) {
-        if (shouldWait)
-            return waitThreadLocal.get().until(ExpectedConditions.visibilityOfElementLocated(by));
-        else
-            return driverThreadLocal.get().findElement(by);
+        if (shouldWait) return waitThreadLocal.get().until(ExpectedConditions.visibilityOfElementLocated(by));
+        else return driverThreadLocal.get().findElement(by);
     }
 
     protected WebElement waitForElementVisibility(WebElement element, boolean shouldWait) {
-        if (shouldWait)
-            return waitThreadLocal.get().until(ExpectedConditions.visibilityOf(element));
-        else
-            return element;
+        if (shouldWait) return waitThreadLocal.get().until(ExpectedConditions.visibilityOf(element));
+        else return element;
     }
 
     protected List<WebElement> waitForAllElementVisibility(By by) {
@@ -180,10 +227,8 @@ public abstract class BrowserActions {
 
     protected void setTextOnElement(WebElement element, String text) {
         WebElement ele = waitForElementVisibility(element, true);
-        if (ele.isEnabled())
-            ele.sendKeys(text);
-        else
-            throw new ElementNotInteractableException("Element is not interactable");
+        if (ele.isEnabled()) ele.sendKeys(text);
+        else throw new ElementNotInteractableException("Element is not interactable");
     }
 
     protected void setTextOnElement(By by, String text) {
@@ -199,14 +244,8 @@ public abstract class BrowserActions {
     }
 
     protected void clickOnElement(By by) {
-//        waitForElementToBeClickable(by).click();
-        waitUntilPageLoad();
-        try {
-            Thread.sleep(1000); // Adding a small delay to ensure the element is ready for interaction
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        waitForElementVisibility(by).click();
+        WebElement element = waitForElementVisibility(by);
+        element.click();
     }
 
     protected List<String> getAllOptionsFromDropDown(By by) {
@@ -297,18 +336,21 @@ public abstract class BrowserActions {
         actionsThreadLocal.get().contextClick(element).build().perform();
     }
 
-    public void waitUntilPageLoad() {
-        Wait<WebDriver> wait = new FluentWait<>(driverThreadLocal.get())
-                .withTimeout(Duration.ofSeconds(15))
-                .pollingEvery(Duration.ofMillis(500))
-                .ignoring(Exception.class);
+    public static void waitUntilPageLoad(WebDriver driver) {
+//        WebDriver driver = driverThreadLocal.get();
 
-        wait.until(driver -> {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            while(!js.executeScript("return document.readyState").toString().equals("complete")) {
-                System.out.println("Waiting for page to load...");
-            }
-            return null;
+        driver.navigate().refresh();
+        Wait<WebDriver> wait = new FluentWait<>(driver).
+                withTimeout(Duration.ofSeconds(15)).
+                pollingEvery(Duration.ofMillis(500)).
+                ignoring(Exception.class);
+
+        wait.until(d -> {
+            String readyState = String.valueOf(((JavascriptExecutor) d).executeScript("return document.readyState"));
+
+            System.out.println("DOM state: " + readyState);
+
+            return "complete".equals(readyState);
         });
     }
 }

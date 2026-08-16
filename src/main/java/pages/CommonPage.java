@@ -36,7 +36,7 @@ public class CommonPage extends BrowserActions {
     }
 
     public void clickOnButtonNameContains(String buttonTextContains) {
-        String locatorvalue = "//button[contains(text(),'%1$s')] | //a[contains(text(),'%1$s')] | //span[contains(text(),'%1$s')] ";
+        String locatorvalue = "//button[contains(text(),'%1$s')] | //a[contains(text(),'%1$s')] | //span[contains(text(),'%1$s')]";
         String locator = String.format(locatorvalue, buttonTextContains);
         clickOnElement(By.xpath(locator));
     }

@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
@@ -41,5 +42,10 @@ public class CommonSteps {
     @Then("user verify {string} text should be displayed")
     public void user_verify_text_should_be_displayed(String visibleText) {
         Assertions.assertTrue(commonPage.isTextDisplayed(visibleText), "Text is not displayed: " + visibleText);
+    }
+
+    @And("user wait until page is loaded")
+    public void userWaitUntilPageIsLoaded() {
+//        commonPage.waitUntilPageLoad();
     }
 }

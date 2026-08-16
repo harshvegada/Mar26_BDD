@@ -86,7 +86,7 @@
                 <version>3.2.5</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <browser>${browserName}</browser>
+<!--                        <browser>${browserName}</browser>-->
                         <environment>${env}</environment>
                     </systemPropertyVariables>
                     <includes>
@@ -111,5 +111,21 @@
             </plugin>
         </plugins>
     </build>
+
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            <id>chrome</id>-->
+<!--            <properties>-->
+<!--                <browserName>chrome</browserName>-->
+<!--            </properties>-->
+<!--        </profile>-->
+
+<!--        <profile>-->
+<!--            <id>firefox</id>-->
+<!--            <properties>-->
+<!--                <browserName>firefox</browserName>-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--    </profiles>-->
 
 </project>

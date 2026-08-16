@@ -85,7 +85,8 @@ Feature: Order Placement
     Then user verify "Order placed!" text should be displayed
 
 
-    @page
+  @page
   Scenario: Verify Edit button on profile is clickable
     And user navigate to profile
+    And user wait until page is loaded
     And user click on button text contains "Edit"

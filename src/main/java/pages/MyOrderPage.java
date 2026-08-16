@@ -1,6 +1,10 @@
 package pages;
 
+import constant.FilePaths;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import utility.PropertyOperations;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,6 +16,7 @@ import java.util.Map;
  * OOPS: Method overloading concept is used here to provide multiple methods with the same name but different parameters to interact with the elements on the page.
  */
 public class MyOrderPage extends CommonPage {
+
     // XPath Constants for locators
     private final String SEARCH_INPUT = "//input[@id='filter-search']";
     private final String ORDERS_TABLE_BODY = "//tbody[@id='orders-tbody']/tr";
@@ -45,4 +50,5 @@ public class MyOrderPage extends CommonPage {
 
         return mapOfOrderItem;
     }
+
 }
