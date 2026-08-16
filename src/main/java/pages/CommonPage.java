@@ -59,6 +59,10 @@ public class CommonPage extends BrowserActions {
         return isElementDisplayed(By.xpath(locator));
     }
 
+    public void m2() {
+        selectByValueText(By.xpath(""), "");
+    }
+
     public void m1(){
         setTextOnElement(By.xpath(""),"");
         clickOnElement(By.xpath(""));
