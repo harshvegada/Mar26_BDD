@@ -58,4 +58,9 @@ public class CommonPage extends BrowserActions {
         String locator = String.format(locatorValue, visibleText);
         return isElementDisplayed(By.xpath(locator));
     }
+
+    public void m1(){
+        setTextOnElement(By.xpath(""),"");
+        clickOnElement(By.xpath(""));
+    }
 }
